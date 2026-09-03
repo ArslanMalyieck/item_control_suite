@@ -85,8 +85,53 @@ app_license = "mit"
 # Installation
 # ------------
 
-# before_install = "item_control_suite.install.before_install"
-# after_install = "item_control_suite.install.after_install"
+after_install = "item_control_suite.install.after_install"
+
+# Permissions
+# -----------
+
+permission_query_conditions = {
+	"Item": "item_control_suite.item_visibility.get_item_permission_query_conditions",
+}
+
+has_permission = {
+	"Item": "item_control_suite.item_visibility.has_permission",
+}
+
+# Document Events
+# ---------------
+
+doc_events = {
+	"Item": {
+		"before_validate": "item_control_suite.permissions.check_item_create_permission",
+	},
+	"Purchase Invoice": {
+		"before_validate": "item_control_suite.purchase_invoice.derive_rate_from_input_amount",
+	},
+}
+
+# Doctype JS (list view + form view)
+# ----------------------------------
+
+doctype_list_js = {
+	"Item": "public/js/item_views.js",
+}
+
+doctype_js = {
+	"Purchase Invoice": "public/js/purchase_invoice.js",
+}
+
+# Fixtures (custom fields synced on install/migrate)
+# --------------------------------------------------
+
+fixtures = [
+	{
+		"dt": "Custom Field",
+		"filters": [
+			["module", "=", "Item Control Suite"]
+		]
+	}
+]
 
 # Uninstallation
 # ------------
@@ -124,15 +169,11 @@ app_license = "mit"
 
 # Permissions
 # -----------
-# Permissions evaluated in scripted ways
+# (registered above: permission_query_conditions + has_permission for Item)
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+# DocType JS
+# ----------
+# (registered above: doctype_list_js for Item, doctype_js for Purchase Invoice)
 
 # Document Events
 # ---------------

@@ -1,0 +1,16 @@
+[
+	{
+		"doctype": "Custom Field",
+		"name": "Purchase Invoice Item-custom_input_amount",
+		"dt": "Purchase Invoice Item",
+		"fieldname": "custom_input_amount",
+		"fieldtype": "Currency",
+		"label": "Amount",
+		"insert_after": "qty",
+		"module": "Item Control Suite",
+		"no_copy": 0,
+		"options": "currency",
+		"read_only": 0,
+		"reqd": 0
+	}
+]
